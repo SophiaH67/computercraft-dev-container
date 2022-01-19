@@ -20,5 +20,8 @@ RUN curl -fsSL https://github.com/marnixah.keys >> /root/.ssh/authorized_keys
 # Set ZSH as default shell
 RUN chsh -s /bin/zsh
 
+# Set root password to a 16 character random password
+RUN echo "root:$(openssl rand -base64 16)" | chpasswd
+
 # Start SSH server
 CMD ["/usr/sbin/sshd", "-D"]
